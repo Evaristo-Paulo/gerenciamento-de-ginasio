@@ -1,3 +1,15 @@
-h2 {
+/* Quandro Estatística HOME */
+.top_tiles {
+    width: 100%
+}
+
+.top_tiles p {
+    font-size: 1.2rem
+}
+.top_tiles .tile-stats {
+    box-shadow: 0px 5px 15px rgba(0,0,0,.2)
+}
+
+.required {
     color: red
 }

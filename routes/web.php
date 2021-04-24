@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('', 'mainController@home')->name('home');
+Route::get('funcionarios/registo', 'workerController@registerForm')->name('worker.register.form');
 
