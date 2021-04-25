@@ -3,16 +3,18 @@
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Registo de Funcionário</h3>
+            </div>
+        </div>
         <div class="clearfix"></div>
+
         <div class="row">
+
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_content">
-                        <div class="page-title">
-                            <div class="title_left">
-                                <h3>Registo de Funcionário</h3>
-                            </div>
-                        </div>
                         <!-- Smart Wizard -->
                         <p>(<span class="required">*</span>) -> Campo de preenchemento obrigatório</p>
                         <div id="wizard" class="form_wizard wizard_horizontal">
@@ -251,7 +253,7 @@
     <div class="menu_section">
         <h3>Controle de Acesso</h3>
         <ul class="nav side-menu">
-            <li><a><i class="fa fa-gears"></i> Usuário <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-bug"></i> Usuário <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="e_commerce.html">Registo</a></li>
                     <li><a href="projects.html">Listagem</a></li>

@@ -435,15 +435,17 @@ $.fn.smartWizard.defaults = {
     contentCache:true, // cache step contents, if false content is fetched always from ajax url
     cycleSteps: false, // cycle step navigation
     enableFinishButton: false, // make finish button enabled always
-	hideButtonsOnDisabled: false, // when the previous/next/finish buttons are disabled, hide them instead?
+	hideButtonsOnDisabled: true, // when the previous/next/finish buttons are disabled, hide them instead?
     errorSteps:[],    // Array Steps with errors
-    labelNext:'Next',
-    labelPrevious:'Previous',
-    labelFinish:'Finish',
-    noForwardJumping: false,
+    labelNext:'Próximo',
+    labelPrevious:'Anterior',
+    labelFinish:'Enviar',
+    noForwardJumping: true,
     onLeaveStep: null, // triggers when leaving a step
     onShowStep: null,  // triggers when showing a step
-    onFinish: null  // triggers when Finish button is clicked
+    onFinish: function (event, currentIndex) {
+            $("#form").submit();
+        },
 };
 
 })(jQuery);

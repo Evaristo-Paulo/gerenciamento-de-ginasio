@@ -18,10 +18,6 @@
     <!-- NProgress -->
     <link href="{{ url('painel/vendors/nprogress/nprogress.css') }}" rel="stylesheet">
     <!-- jQuery custom content scroller -->
-    <link
-        href="{{ url('painel/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css"') }}"
-        rel="stylesheet" />
-    <!-- Custom Theme Style -->
     <link href="{{ url('painel/build/css/custom.min.css') }}" rel="stylesheet">
     <link href="{{ url('painel/css/style.css') }}" rel="stylesheet">
     <link href="{{ url('painel/css/responsive.css') }}" rel="stylesheet">
@@ -57,12 +53,9 @@
     <!-- NProgress -->
     <script src="{{ url('painel/vendors/nprogress/nprogress.js') }}"></script>
     <!-- jQuery custom content scroller -->
-    <script
-        src="{{ url('painel/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}">
-    </script>
-    <!-- Custom Theme Scripts -->
-    <script src="{{ url('painel/build/js/custom.min.js') }}"></script>
     @stack('js')
+    <script src="{{ url('painel/build/js/custom.min.js') }}"></script>
+
 
 </body>
 
