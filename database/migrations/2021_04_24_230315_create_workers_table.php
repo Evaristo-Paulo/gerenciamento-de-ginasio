@@ -15,15 +15,14 @@ class CreateWorkersTable extends Migration
     {
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
-            $table->date('birthday');
-            $table->string('bi');
-            $table->string('phone');
+            $table->date('birthday')->nullable();
+            $table->string('bi')->nullable();
+            $table->string('phone')->nullable();
+            $table->text('photo')->nullable();
             $table->bigInteger('ocupation_id')->unsigned();
             $table->foreign('ocupation_id')->references('id')->on('ocupations')->onDelete('cascade');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->bigInteger('gender_id')->unsigned();
-            $table->foreign('gender_id')->references('id')->on('genders')->onDelete('cascade');
             $table->bigInteger('hood_id')->unsigned();
             $table->foreign('hood_id')->references('id')->on('hoods')->onDelete('cascade');
             $table->timestamps();

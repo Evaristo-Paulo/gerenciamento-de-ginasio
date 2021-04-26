@@ -29,7 +29,7 @@
 
                         <h1>Painel de Controle</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="Email" name="email" required="" />
+                            <input type="text" class="form-control" placeholder="Email" value="{{ old('email') }}" name="email" required="" />
                         </div>
                         <div>
                             <input type="password" class="form-control" placeholder="Senha" name="password" required="" />

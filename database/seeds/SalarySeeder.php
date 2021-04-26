@@ -13,7 +13,7 @@ class SalarySeeder extends Seeder
     public function run()
     {
         Salary::create([
-            'value' => 50000
+            'value' => 150000
         ]);
         Salary::create([
             'value' => 35000

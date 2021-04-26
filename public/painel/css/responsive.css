@@ -3,10 +3,33 @@
     .wizard_steps{
         left: -10%
     }
+    .modal-full-body {
+        width: 65%;
+        z-index: 300;
+        right: -20px;
+    }
+
+    .modal-full-body .btn {
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+    .modal-full-body .item {
+        margin: 10px;
+    }
+    #sidebar-menu{
+        z-index: 200;
+
+    }
+    .option-title {
+        font-size: .7rem;
+        display: none;
+    }
 }
 
 @media screen and (min-width: 768px ) and (max-width: 1023.5px ){
-    
+    .modal-full-body {
+        width: 70%;
+    }
 }
 @media screen and (min-width: 1024px ){
     

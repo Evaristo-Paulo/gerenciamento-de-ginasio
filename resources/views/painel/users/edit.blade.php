@@ -8,21 +8,21 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Formulário de Registo |<small>Usuários</small></h2>
+                        <h2>Formulário de Actualização |<small>Usuários</small></h2>
                         <div class="clearfix"></div>
                         @if( session('password-different') )
                             <ul class="alert alert-warning animated fadeInDown" role="alert">
                                 <li><i class="fa fa-warning"></i> {{ session('password-different') }}</li>
                             </ul>
                         @endif
-                        @if( session('update-auth') )
-                            <ul class="alert alert-warning animated fadeInDown" role="alert">
-                                <li><i class="fa fa-warning"></i> {{ session('update-auth') }}</li>
-                            </ul>
-                        @endif
                         @if( session('create-auth') )
                             <ul class="alert alert-warning animated fadeInDown" role="alert">
                                 <li><i class="fa fa-warning"></i> {{ session('create-auth') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('update-auth') )
+                            <ul class="alert alert-warning animated fadeInDown" role="alert">
+                                <li><i class="fa fa-warning"></i> {{ session('update-auth') }}</li>
                             </ul>
                         @endif
                         @if( session('user-not-found') )
@@ -40,11 +40,6 @@
                                 <li><i class="fa fa-warning"></i> {{ session('error-exception') }}</li>
                             </ul>
                         @endif
-                        @if( session('created') )
-                            <ul class="alert alert-success animated fadeInDown" role="alert">
-                                <li><i class="fa fa-check"></i> {{ session('created') }}</li>
-                            </ul>
-                        @endif
                         @if( session('password-changed') )
                             <ul class="alert alert-success animated fadeInDown" role="alert">
                                 <li><i class="fa fa-check"></i> {{ session('password-changed') }}</li>
@@ -52,10 +47,10 @@
                         @endif
                         @if( session('warning') )
                             <ul class="alert alert-warning animated fadeInDown" role="alert">
-                            <li><i class="fa fa-warning"></i> {{ session('warning') }}</li>
+                                <li><i class="fa fa-warning"></i> {{ session('warning') }}</li>
                             </ul>
-                         @endif
-                         @if($errors->any())
+                        @endif
+                        @if($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach($errors->all() as $error)
@@ -68,16 +63,18 @@
                     <div class="x_content">
                         <br />
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"
-                            method="POST" action="{{ route('user.register') }}">
+                            method="POST" action="{{ route('user.edit', $user->id) }}">
                             {{ csrf_field() }}
+                            @method('PUT')
+                            <input type="hidden" name="user_id" value="{{ $user->id }}">
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nome
                                     Completo
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="name" name="name" 
-                                        value="{{ old('name') }}" class="form-control " required="required">
+                                    <input type="text" id="name" minlength="3" name="name" required="required"
+                                        value="{{ $user->name }}" class="form-control ">
                                 </div>
                             </div>
                             <div class="form-group item">
@@ -87,7 +84,7 @@
                                     @foreach( $genders as $index => $value )
                                         <div class="checkbox">
                                             <label for="{{ $value->type }}">
-                                                @if($value->type == 'Masculino')
+                                                @if($value->id == $user->gender_id)
                                                     <input type="radio" class="flat" checked="checked"
                                                         id="{{ $value->type }}" name="gender"
                                                         value="{{ $value->id }}">
@@ -108,16 +105,7 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="email" id="email" name="email" required="required" class="form-control"
-                                        value="{{ old('email') }}">
-                                </div>
-                            </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Senha
-                                    <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input type="password" id="password" name="password" minlength="6" required="required"
-                                        class="form-control" value="{{ old('password') }}">
+                                        value="{{ $user->email  }}">
                                 </div>
                             </div>
                             <div class="form-group item">
@@ -127,13 +115,13 @@
                                     @foreach( $roles as $index => $value )
                                         <div class="checkbox">
                                             <label for="{{ $value->type }}">
-                                                @if($value->type == 'User')
+                                                @if( in_array($user->id, $roles_users->where('role_id', $value->id)->pluck('user_id')->toArray()))
                                                     <input type="checkbox" class="flat" checked="checked"
                                                         id="{{ $value->type }}" name="role[]"
                                                         value="{{ $value->type }}">
                                                     {{ $value->type }}
                                                 @else
-                                                    <input type="checkbox" class="flat" id="{{ $value->type }}"
+                                                    <input type="checkbox"  class="flat" id="{{ $value->type }}"
                                                         name="role[]" value="{{ $value->type }}">
                                                     {{ $value->type }}
                                                 @endif
@@ -177,7 +165,6 @@
     <link href="{{ url('painel/vendors/starrr/dist/starrr.css') }}" rel="stylesheet">
     <link href="{{ url('painel/vendors/bootstrap-daterangepicker/daterangepicker.css') }}"
         rel="stylesheet">
-
 @endpush
 
 @push('js')

@@ -44,7 +44,7 @@ class mainController extends Controller
             return redirect()->route('home');
         }
 
-        return redirect()->route('login.form')->with('errorMessage', 'Credenciais inválidos!');
+        return redirect()->route('login.form')->withInput($request->all());
     }
 
     public function logout(){

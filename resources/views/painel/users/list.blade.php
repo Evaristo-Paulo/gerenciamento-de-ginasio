@@ -10,6 +10,66 @@
                     <div class="x_title">
                         <h2>Listagem |<small>Usuários</small></h2>
                         <div class="clearfix"></div>
+                        @if( session('create-auth') )
+                            <ul class="alert alert-warning animated fadeInDown" role="alert">
+                                <li><i class="fa fa-warning"></i> {{ session('create-auth') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('update-auth') )
+                            <ul class="alert alert-warning animated fadeInDown" role="alert">
+                                <li><i class="fa fa-warning"></i> {{ session('update-auth') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('edit-auth') )
+                            <ul class="alert alert-warning animated fadeInDown" role="alert">
+                                <li><i class="fa fa-warning"></i> {{ session('edit-auth') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('delete-auth') )
+                            <ul class="alert alert-warning animated fadeInDown" role="alert">
+                                <li><i class="fa fa-warning"></i> {{ session('delete-auth') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('warning') )
+                            <ul class="alert alert-warning animated fadeInDown" role="alert">
+                                <li><i class="fa fa-warning"></i> {{ session('warning') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('user-not-found') )
+                            <ul class="alert alert-warning animated fadeInDown" role="alert">
+                                <li><i class="fa fa-warning"></i> {{ session('user-not-found') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('error') )
+                            <ul class="alert alert-warning animated fadeInDown" role="alert">
+                                <li><i class="fa fa-warning"></i> {{ session('error') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('error-exception') )
+                            <ul class="alert alert-warning animated fadeInDown" role="alert">
+                                <li><i class="fa fa-warning"></i> {{ session('error-exception') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('password-different') )
+                            <ul class="alert alert-warning animated fadeInDown" role="alert">
+                                <li><i class="fa fa-warning"></i> {{ session('password-different') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('updated') )
+                            <ul class="alert alert-success animated fadeInDown" role="alert">
+                                <li><i class="fa fa-check"></i> {{ session('updated') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('deleted') )
+                            <ul class="alert alert-success animated fadeInDown" role="alert">
+                                <li><i class="fa fa-check"></i> {{ session('deleted') }}</li>
+                            </ul>
+                        @endif
+                        @if( session('password-changed') )
+                            <ul class="alert alert-success animated fadeInDown" role="alert">
+                                <li><i class="fa fa-check"></i> {{ session('password-changed') }}</li>
+                            </ul>
+                        @endif
                     </div>
                     <div class="x_content">
                         <div class="row">
@@ -22,20 +82,58 @@
                                         <thead>
                                             <tr>
                                                 <th>Nome</th>
+                                                <th>Gênero</th>
                                                 <th>Email</th>
                                                 <th>Role</th>
-                                                <th>Opção</th>
+                                                <th class="option-title">Opção</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Tiger</td>
-                                                <td>t.nixon@datatables.net</td>
-                                                <td>Admin</td>
-                                                <td>
-                                                    < class="btn btn-warning"><i class="fa fa-trash" aria-hidden="true"></i> Remover</button>
-                                                </td>
-                                            </tr>
+                                            @forelse($users as $key => $user)
+                                                <tr>
+                                                    <td>{{ $user->name }}</td>
+                                                    <td>{{ $genders->where('id', $user->gender_id)->first()->type }}</td>
+                                                    <td>{{ $user->email }}</td>
+                                                    <td>
+                                                        @foreach ( $roles_users->where('user_id', $user->id)->pluck('role_id')->toArray() as $role_user )
+                                                            @foreach ( $roles as $role )
+                                                                @if($role->id == $role_user)
+                                                                {{ $role->type }},
+                                                                @endif
+                                                            @endforeach
+                                                        @endforeach
+                                                    </td>
+                                                    <td class="option-data">
+                                                        @can('delete')
+                                                            @if ($user->id == Auth::user()->id)
+                                                                <a href="#" class="btn btn-info"><i class="fa fa-refresh"
+                                                                aria-hidden="true"></i> <span class="option-title">Actualizar</span></a>
+                                                                <button class="btn btn-danger"><i
+                                                                    class="fa fa-trash-o" aria-hidden="true"></i>
+                                                                    <span class="option-title">Remover</span></button>
+                                                            @else
+                                                            <a href="{{ route('user.edit.form', $user->id ) }}" class="btn btn-info"><i class="fa fa-refresh"
+                                                                aria-hidden="true"></i> <span class="option-title">Actualizar</span></a>
+                                                            <form action="{{ route('user.remove') }}"
+                                                            method="POST" style="display: inline">
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" name="element"
+                                                                    value="{{ $user->id }}">
+                                                                <button class="btn btn-danger" type="submit"><i
+                                                                        class="fa fa-trash-o" aria-hidden="true"></i>
+                                                                        <span class="option-title">Remover</span></button>
+                                                            </form>
+                                                            @endif 
+                                                        @endcan
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <h3>Sem clientes registados</h3>
+                                                    </td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -53,46 +151,7 @@
 @endsection
 
 @section('menu-aside')
-<!-- sidebar menu -->
-<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-    <div class="menu_section">
-        <h3>Home</h3>
-        <ul class="nav side-menu">
-            <li><a><i class="fa fa-home"></i> Funcionário <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="index.html">Registo</a></li>
-                    <li><a href="index2.html">Listagem</a></li>
-                </ul>
-            </li>
-            <li><a><i class="fa fa-desktop"></i> Cliente <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="general_elements.html">Registo</a></li>
-                    <li><a href="media_gallery.html">Listagem</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div class="menu_section">
-        <h3>Relatório</h3>
-        <ul class="nav side-menu">
-            <li><a><i class="fa fa-bug"></i> Funcionário </a></li>
-            <li><a><i class="fa fa-bug"></i> Cliente </a></li>
-        </ul>
-    </div>
-    <div class="menu_section">
-        <h3>Controle de Acesso</h3>
-        <ul class="nav side-menu">
-            <li><a><i class="fa fa-gears"></i> Usuário <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="e_commerce.html">Registo</a></li>
-                    <li><a href="projects.html">Listagem</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-
-</div>
-<!-- /sidebar menu -->
+@include('painel.partials.aside-origin')
 @endsection
 
 @push('css')
@@ -123,7 +182,8 @@
 
 @push('js')
     <script src="{{ url('painel/vendors/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ url('painel/vendors/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url('painel/vendors/bootstrap/dist/js/bootstrap.bundle.min.js') }}">
+    </script>
     <script src="{{ url('painel/vendors/fastclick/lib/fastclick.js') }}"></script>
     <script src="{{ url('painel/vendors/nprogress/nprogress.js') }}"></script>
     <script src="{{ url('painel/vendors/iCheck/icheck.min.js') }}"></script>

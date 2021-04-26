@@ -43,6 +43,8 @@
         </div>
     </div>
 
+
+@include('painel.partials.modal')    
     <!-- jQuery -->
     <script src="{{ url('painel/vendors/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
@@ -56,6 +58,7 @@
     @stack('js')
     <script src="{{ url('painel/build/js/custom.min.js') }}"></script>
 
+    <script src="{{ url('painel/js/script.js') }}"></script>
 
 </body>
 
