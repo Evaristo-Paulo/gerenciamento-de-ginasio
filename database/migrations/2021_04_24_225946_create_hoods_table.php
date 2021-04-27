@@ -16,7 +16,7 @@ class CreateHoodsTable extends Migration
         Schema::create('hoods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('street');
+            $table->string('street')->nullable();
             $table->bigInteger('municipe_id')->unsigned();
             $table->foreign('municipe_id')->references('id')->on('municipes')->onDelete('cascade');
             $table->timestamps();

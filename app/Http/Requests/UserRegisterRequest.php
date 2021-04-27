@@ -26,7 +26,7 @@ class UserRegisterRequest extends FormRequest
         return [
             'name' => 'required|min:3',
             //'email' => "required|unique:users,email,{$this->user->id}",
-            'email' => "required|unique:users,email",
+            'email' => "required|email|unique:users,email",
             'password' => 'required|min:6',
             'role' => 'required',
             'gender' => 'required',
@@ -35,7 +35,8 @@ class UserRegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Campo nome é de preenchimento obrigatório ',
+            'name.required' => 'Campo nome completo é de preenchimento obrigatório ',
+            'email.email' => 'Campo email deve receber um email válido ',
             'email.required' => 'Campo email é de preenchimento obrigatório ',
             'password.required' => 'Campo senha é de preenchimento obrigatório ',
             'gender.required' => 'Campo gênero é de preenchimento obrigatório ',

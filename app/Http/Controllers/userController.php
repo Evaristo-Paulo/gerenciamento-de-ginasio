@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\UserChangePasswordRequest;
 
 class userController extends Controller
 {
@@ -44,7 +45,7 @@ class userController extends Controller
         }
         return redirect()->route('login.form')->with('errorMessage', 'Faça login!');
     }
-    public function edit(UserUpdateRequest $request, User $id)
+    public function edit(UserUpdateRequest $request, $id)
     {
         try {
 
@@ -76,10 +77,12 @@ class userController extends Controller
             //return redirect()->back()->withInput($request->all());
         }
     }
-    public function changePassword(Request $request)
+    public function changePassword(UserChangePasswordRequest $request)
     {
         try {
-            $id = User::where('email', $request->email)->first()->id;
+            $id = User::where('email', $request->email)
+            ->where('status', 1)
+            ->first()->id;
 
             if (Auth::user()->id == $id) {
                 if (Gate::denies('update-password')){

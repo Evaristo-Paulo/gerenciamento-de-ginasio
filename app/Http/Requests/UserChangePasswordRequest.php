@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserUpdateRequest extends FormRequest
+class UserChangePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,22 +24,21 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3',
             'email' => "required|email",
-            'role' => 'required',
-            'gender' => 'required',
+            'password' => 'required|min:6',
+            'password-same' => 'required|min:6|same:password',
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'Campo nome completo é de preenchimento obrigatório ',
             'email.required' => 'Campo email é de preenchimento obrigatório ',
             'email.email' => 'Campo email deve receber um email válido ',
-            'gender.required' => 'Campo gênero é de preenchimento obrigatório ',
-            'role.required' => 'Campo role é de preenchimento obrigatório ',
-            'email.unique' => 'Já existe usuário com este email ',
-            'name.min' => 'Campo nome deve ter mais de 2 caracteres ',
+            'password.required' => 'Campo senha é de preenchimento obrigatório ',
+            'password-same.required' => 'Campo confirma senha é de preenchimento obrigatório ',
+            'password.min' => 'Campo senha deve ter mais de 5 caracteres ',
+            'password-same.min' => 'Campo confirma senha deve ter mais de 5 caracteres ',
+            'password-same.same' => 'Campo confirma senha deve ser igual ao campo senha ',
         ];
     }
 }

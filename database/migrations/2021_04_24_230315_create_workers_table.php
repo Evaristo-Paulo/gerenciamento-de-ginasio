@@ -16,9 +16,8 @@ class CreateWorkersTable extends Migration
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
             $table->date('birthday')->nullable();
-            $table->string('bi')->nullable();
+            $table->string('bi')->nullable()->unique();
             $table->string('phone')->nullable();
-            $table->text('photo')->nullable();
             $table->bigInteger('ocupation_id')->unsigned();
             $table->foreign('ocupation_id')->references('id')->on('ocupations')->onDelete('cascade');
             $table->bigInteger('user_id')->unsigned();

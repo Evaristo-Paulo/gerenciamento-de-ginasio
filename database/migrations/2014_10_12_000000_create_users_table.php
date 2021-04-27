@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->foreign('gender_id')->references('id')->on('genders')->onDelete('cascade');            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->text('photo')->nullable();
             $table->integer('status')->unsigned()->default(1);
             $table->rememberToken();
             $table->timestamps();

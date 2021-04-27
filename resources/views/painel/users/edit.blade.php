@@ -60,10 +60,11 @@
                             </div>
                         @endif
                     </div>
+                    <p class="message-field-required">(<span class="required">*</span>) -> Campo de preenchemento obrigatório</p>
                     <div class="x_content">
                         <br />
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"
-                            method="POST" action="{{ route('user.edit', $user->id) }}">
+                            method="POST" action="{{ route('user.edit', $user->id ) }}">
                             {{ csrf_field() }}
                             @method('PUT')
                             <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -78,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="form-group item">
-                                <label class="col-md-3 col-sm-3  label-align">Gênero <span class="required"></span>
+                                <label class="col-md-3 col-sm-3  label-align">Gênero <span class="required">*</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 ">
                                     @foreach( $genders as $index => $value )

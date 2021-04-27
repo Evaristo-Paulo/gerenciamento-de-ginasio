@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Evaristo Paulo',
             'email' => 'root@gmail.com',
+            'photo' => 'default.png',
             'gender_id' => 1,
             'password' => Hash::make('root')
         ]);
@@ -23,6 +24,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Etelvina Catenda',
             'email' => 'user@gmail.com',
+            'photo' => 'default.png',
             'gender_id' => 2,
             'password' => Hash::make('user')
         ]);

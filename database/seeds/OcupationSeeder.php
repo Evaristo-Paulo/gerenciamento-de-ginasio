@@ -18,13 +18,18 @@ class OcupationSeeder extends Seeder
             'salary_id' => 1
         ]);
         Ocupation::create([
-            'name' => 'Personnal trainer',
+            'name' => 'Personal trainer',
             'description' => 'Treinador de musculação e aeróbica',
             'salary_id' => 3
         ]);
         Ocupation::create([
-            'name' => 'Secretária',
+            'name' => 'Secretária(o)',
             'description' => 'Atendimento no balção',
+            'salary_id' => 2
+        ]);
+        Ocupation::create([
+            'name' => 'Outros',
+            'description' => 'Função genérica',
             'salary_id' => 2
         ]);
     }

@@ -6,8 +6,11 @@
         <ul class="nav side-menu">
             <li><a><i class="fa fa-home"></i> Funcionário <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="index.html">Registo</a></li>
-                    <li><a href="index2.html">Listagem</a></li>
+                    @can('create')
+                    <li><a href="{{  route('worker.register.form') }}">Registo</a></li>
+                    @endcan
+                    <li><a href="{{  route('worker.list') }}">Listagem</a></li>
+                    <li><a href="#" class="modal-alteracao-fotografia">Alterar fotografia</a></li>
                 </ul>
             </li>
             <li><a><i class="fa fa-desktop"></i> Cliente <span class="fa fa-chevron-down"></span></a>
@@ -35,7 +38,7 @@
                     @endcan
                     <li><a href="{{ route('user.list') }}">Listagem</a></li>
                     @can('create')
-                    <li><a href="#" class="modal-alterao-senha">Alteração de Senha</a></li>
+                    <li><a href="#" class="modal-alteracao-senha">Alteração de Senha</a></li>
                     @endcan
                 </ul>
             </li>
