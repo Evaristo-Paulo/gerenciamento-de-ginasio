@@ -8,7 +8,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Listagem |<small>Usuários</small></h2>
+                        <h2>Listagem |<small>Pagamentos</small></h2>
                         <div class="clearfix"></div>
                         @if( session('create-auth') )
                             <ul class="alert alert-warning animated fadeInDown" role="alert">
@@ -47,12 +47,14 @@
                         @endif
                         @if( session('error-exception') )
                             <ul class="alert alert-warning animated fadeInDown" role="alert">
-                                <li><i class="fa fa-warning"></i> {{ session('error-exception') }}</li>
+                                <li><i class="fa fa-warning"></i> {{ session('error-exception') }}
+                                </li>
                             </ul>
                         @endif
                         @if( session('password-different') )
                             <ul class="alert alert-warning animated fadeInDown" role="alert">
-                                <li><i class="fa fa-warning"></i> {{ session('password-different') }}</li>
+                                <li><i class="fa fa-warning"></i> {{ session('password-different') }}
+                                </li>
                             </ul>
                         @endif
                         @if( session('updated') )
@@ -84,62 +86,29 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-
                                     <table id="datatable-responsive"
                                         class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
                                         width="100%">
                                         <thead>
                                             <tr>
                                                 <th>Nome</th>
-                                                <th>Gênero</th>
-                                                <th>Email</th>
-                                                <th>Role</th>
-                                                <th class="option-title">Opção</th>
+                                                <th>Qtd. meses em atraso</th>
+                                                <th>Último mês pago</th>
+                                                <th>Data</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse($users as $key => $user)
+                                            @forelse( $payments as $i => $payment )
                                                 <tr>
-                                                    <td>{{ $user->name }}</td>
-                                                    <td>{{ $genders->where('id', $user->gender_id)->first()->type }}</td>
-                                                    <td>{{ $user->email }}</td>
-                                                    <td>
-                                                        @foreach ( $roles_users->where('user_id', $user->id)->pluck('role_id')->toArray() as $role_user )
-                                                            @foreach ( $roles as $role )
-                                                                @if($role->id == $role_user)
-                                                                {{ $role->type }},
-                                                                @endif
-                                                            @endforeach
-                                                        @endforeach
-                                                    </td>
-                                                    <td class="option-data">
-                                                        @can('delete')
-                                                            @if ($user->id == Auth::user()->id)
-                                                                <a href="#" class="btn btn-info"><i class="fa fa-refresh"
-                                                                aria-hidden="true"></i> <span class="option-title"></span></a>
-                                                                <button class="btn btn-danger"><i
-                                                                    class="fa fa-trash-o" aria-hidden="true"></i>
-                                                                    <span class="option-title"></span></button>
-                                                            @else
-                                                            <a href="{{ route('user.edit.form', $user->id ) }}" class="btn btn-info"><i class="fa fa-refresh"
-                                                                aria-hidden="true"></i> <span class="option-title"></span></a>
-                                                            <form action="{{ route('user.remove') }}"
-                                                            method="POST" style="display: inline">
-                                                                {{ csrf_field() }}
-                                                                <input type="hidden" name="element"
-                                                                    value="{{ $user->id }}">
-                                                                <button class="btn btn-danger" type="submit"><i
-                                                                        class="fa fa-trash-o" aria-hidden="true"></i>
-                                                                        <span class="option-title"></span></button>
-                                                            </form>
-                                                            @endif 
-                                                        @endcan
-                                                    </td>
+                                                    <td>{{ $payment->name }}</td>
+                                                    <td>{{ $dividas[$i] }}</td>
+                                                    <td>{{ $payment->month }}</td>
+                                                    <td>{{  date('d/m/Y', strtotime($payment->date )) }}</td>
                                                 </tr>
                                             @empty
                                                 <tr>
                                                     <td colspan="4">
-                                                        <h3>Sem usuários registados</h3>
+                                                        <p>Sem clientes com dívidas</p>
                                                     </td>
                                                 </tr>
                                             @endforelse

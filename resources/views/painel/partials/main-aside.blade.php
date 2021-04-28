@@ -1,7 +1,7 @@
-<div class="col-md-3 left_col menu_fixed">
+<div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <div class="site_title"><span class="title-tiny">Painel de controle</span>
+            <div class="site_title"><a href="{{ route('home') }}" class="title-tiny">Painel de controle</a>
             </div>
         </div>
 

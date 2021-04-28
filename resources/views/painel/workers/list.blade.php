@@ -107,18 +107,16 @@
                                                     <td>{{ $worker->ocupation }}</td>
                                                     <td>{{ $worker->municipe }}, {{ $worker->hood }}</td>
                                                     <td class="option-data">
-                                                        <a href="#" class="btn btn-primary"><i class="fa fa-eye"
-                                                            aria-hidden="true"></i> <span class="option-title">Detalhar</span></a>
                                                         @can('delete')
                                                             @if ($worker->id == Auth::user()->id)
                                                                 <a href="#" class="btn btn-info"><i class="fa fa-refresh"
-                                                                aria-hidden="true"></i> <span class="option-title">Actualizar</span></a>
+                                                                aria-hidden="true"></i> <span class="option-title"></span></a>
                                                                 <button class="btn btn-danger"><i
                                                                     class="fa fa-trash-o" aria-hidden="true"></i>
-                                                                    <span class="option-title">Remover</span></button>
+                                                                    <span class="option-title"></span></button>
                                                             @else
                                                             <a href="{{ route('worker.edit.form', $worker->id ) }}" class="btn btn-info"><i class="fa fa-refresh"
-                                                                aria-hidden="true"></i> <span class="option-title">Actualizar</span></a>
+                                                                aria-hidden="true"></i> <span class="option-title"></span></a>
                                                             <form action="{{ route('worker.remove') }}"
                                                             method="POST" style="display: inline">
                                                                 {{ csrf_field() }}
@@ -126,7 +124,7 @@
                                                                     value="{{ $worker->id }}">
                                                                 <button class="btn btn-danger" type="submit"><i
                                                                         class="fa fa-trash-o" aria-hidden="true"></i>
-                                                                        <span class="option-title">Remover</span></button>
+                                                                        <span class="option-title"></span></button>
                                                             </form>
                                                             @endif 
                                                         @endcan

@@ -8,7 +8,6 @@ use App\Models\Hood;
 use App\Models\Role;
 use App\Models\Gender;
 use App\Models\Worker;
-use App\Models\Municipe;
 use App\Models\Province;
 use App\Models\RoleUser;
 use App\Models\Ocupation;

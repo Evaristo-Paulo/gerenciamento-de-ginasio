@@ -8,7 +8,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Listagem |<small>Usuários</small></h2>
+                        <h2>Listagem |<small>Clientes</small></h2>
                         <div class="clearfix"></div>
                         @if( session('create-auth') )
                             <ul class="alert alert-warning animated fadeInDown" role="alert">
@@ -92,42 +92,36 @@
                                             <tr>
                                                 <th>Nome</th>
                                                 <th>Gênero</th>
+                                                <th>Telefone</th>
                                                 <th>Email</th>
-                                                <th>Role</th>
+                                                <th>Endereço</th>
                                                 <th class="option-title">Opção</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse($users as $key => $user)
+                                            @forelse($workers as $worker)
                                                 <tr>
-                                                    <td>{{ $user->name }}</td>
-                                                    <td>{{ $genders->where('id', $user->gender_id)->first()->type }}</td>
-                                                    <td>{{ $user->email }}</td>
-                                                    <td>
-                                                        @foreach ( $roles_users->where('user_id', $user->id)->pluck('role_id')->toArray() as $role_user )
-                                                            @foreach ( $roles as $role )
-                                                                @if($role->id == $role_user)
-                                                                {{ $role->type }},
-                                                                @endif
-                                                            @endforeach
-                                                        @endforeach
-                                                    </td>
+                                                    <td>{{ $worker->name }}</td>
+                                                    <td>{{ $worker->gender }}</td>
+                                                    <td>{{ $worker->phone }}</td>
+                                                    <td>{{ $worker->email }}</td>
+                                                    <td>{{ $worker->municipe }}, {{ $worker->hood }}</td>
                                                     <td class="option-data">
                                                         @can('delete')
-                                                            @if ($user->id == Auth::user()->id)
+                                                            @if ($worker->id == Auth::user()->id)
                                                                 <a href="#" class="btn btn-info"><i class="fa fa-refresh"
                                                                 aria-hidden="true"></i> <span class="option-title"></span></a>
                                                                 <button class="btn btn-danger"><i
                                                                     class="fa fa-trash-o" aria-hidden="true"></i>
                                                                     <span class="option-title"></span></button>
                                                             @else
-                                                            <a href="{{ route('user.edit.form', $user->id ) }}" class="btn btn-info"><i class="fa fa-refresh"
+                                                            <a href="{{ route('client.edit.form', $worker->id ) }}" class="btn btn-info"><i class="fa fa-refresh"
                                                                 aria-hidden="true"></i> <span class="option-title"></span></a>
-                                                            <form action="{{ route('user.remove') }}"
+                                                            <form action="{{ route('client.remove') }}"
                                                             method="POST" style="display: inline">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="element"
-                                                                    value="{{ $user->id }}">
+                                                                    value="{{ $worker->id }}">
                                                                 <button class="btn btn-danger" type="submit"><i
                                                                         class="fa fa-trash-o" aria-hidden="true"></i>
                                                                         <span class="option-title"></span></button>
@@ -138,8 +132,8 @@
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td colspan="4">
-                                                        <h3>Sem usuários registados</h3>
+                                                    <td colspan="6">
+                                                        <h3>Sem funcionários registados</h3>
                                                     </td>
                                                 </tr>
                                             @endforelse

@@ -36,6 +36,24 @@ Route::post('/funcionarios/remocao', 'workerController@remover')->name('worker.r
 Route::get('/funcionarios/{id}/actualizacao', 'workerController@editForm')->name('worker.edit.form');
 Route::put('/funcionarios/{id}/actualizacao', 'workerController@edit')->name('worker.edit');
 Route::Post('/funcionarios/actualizacao-de-fotografia', 'workerController@changePhoto')->name('worker.change.photo');
+/* Clientes */
+Route::get('/clientes/registo', 'clientController@registerForm')->name('client.register.form');
+Route::post('/clientes/registo', 'clientController@register')->name('client.register');
+Route::get('/clientes', 'clientController@list')->name('client.list');
+Route::post('/clientes/remocao', 'clientController@remover')->name('client.remove');
+Route::get('/clientes/{id}/actualizacao', 'clientController@editForm')->name('client.edit.form');
+Route::put('/clientes/{id}/actualizacao', 'clientController@edit')->name('client.edit');
+Route::get('/pagamentos/registo', 'clientController@paymentRegisterForm')->name('payment.register.form');
+Route::post('/pagamentos/registo', 'clientController@paymentRegister')->name('payment.register');
+Route::get('/pagamentos', 'clientController@payments')->name('payment.list');
+Route::get('/historicos', 'clientController@historics')->name('historic.list');
+/* Relatório */
+Route::get('/relatorios/cliente', 'clientController@relatoryHome')->name('client.relatory.home');
+Route::get('/relatorios/clientes', 'clientController@clientRelatories')->name('client.relatories');
+Route::get('/relatorios/pagamentos', 'clientController@paymentRelatories')->name('payment.relatories');
+Route::get('/relatorios/historicos', 'clientController@historicRelatories')->name('historic.relatories');
+Route::get('/relatorios/funcionarios', 'clientController@relatoryHome')->name('worker.relatory.home');
+
 
 
 

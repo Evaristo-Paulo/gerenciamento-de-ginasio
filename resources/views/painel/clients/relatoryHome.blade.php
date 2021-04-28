@@ -60,24 +60,25 @@
                 <div class="animated flipInY col-lg-4 col-md-6 col-sm-6 ">
                     <div class="tile-stats">
                         <div class="icon"><i class="fa fa-group"></i></div>
-                        <div class="count">{{ $workers }}</div>
-                        <p><a href="{{ route('worker.list') }}">Nossos Funcionários</a></p>
-                    </div>
-                </div>
-                <div class="animated flipInY col-lg-4 col-md-6 col-sm-6 ">
-                    <div class="tile-stats">
-                        <div class="icon"><i class="fa fa-user"></i></div>
                         <div class="count">{{ $clients }}</div>
                         <p><a href="{{ route('client.list') }}">Nossos Clientes</a></p>
                     </div>
                 </div>
                 <div class="animated flipInY col-lg-4 col-md-6 col-sm-6 ">
                     <div class="tile-stats">
-                        <div class="icon"><i class="fa fa-question-circle"></i> </div>
-                        <div class="count">{{ $debt_clients }}</div>
-                        <p><a href="{{ route('payment.list') }}">Clientes com Dívida</a></p>
+                        <div class="icon"><i class="fa fa-female" aria-hidden="true"></i></div>
+                        <div class="count">{{ $females }}</div>
+                        <p><a href="{{ route('client.list') }}">Clientes Femininas</a></p>
                     </div>
                 </div>
+                <div class="animated flipInY col-lg-4 col-md-6 col-sm-6 ">
+                    <div class="tile-stats">
+                        <div class="icon"><i class="fa fa-male"></i> </div>
+                        <div class="count">{{  $males }}</div>
+                        <p><a href="{{ route('client.list') }}">Clientes Masculinos</a></p>
+                    </div>
+                </div>
+                
             </div>
             
         </div>
@@ -90,7 +91,7 @@
 @endsection
 
 @section('menu-aside')
-@include('painel.partials.aside-origin')
+@include('painel.partials.relatory-client-aside')
 @endsection
 
 @push('css')
